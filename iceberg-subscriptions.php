@@ -2,8 +2,8 @@
 /*
 Plugin Name:    Iceberg Subscriptions
 Plugin URI:     https://www.icebergwebdesign.com/
-Description:    A plugin to run the subscription system for Iceberg Web Design
-Author:         Iceberg Web Design
+Description:    A plugin to run the subscription system for xxx
+Author:         xxx
 Author URI:     https://www.icebergwebdesign.com
 License:        GPL2
 License URI:    https://www.gnu.org/licenses/gpl-2.0.html
@@ -182,7 +182,7 @@ function add_invoice_item( $customer, $feed, $entry, $form ) {
     // get the currency code for this entry.
     $currency = rgar( $entry, 'currency' );    
  
-    // get the amount from field 5 and convert it to the smallest unit required by Stripe for the currency being used.
+    // get the amount from field and convert it to the smallest unit required by Stripe for the currency being used.
     $amount = gf_stripe()->get_amount_export( rgar( $entry, '217.2' ), $currency ); // Update 5 to your field id
  
     $item = array(
