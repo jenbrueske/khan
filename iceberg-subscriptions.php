@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name:    Iceberg Subscriptions
-Plugin URI:     https://www.icebergwebdesign.com/
+Plugin Name:    Subscriptions
+Plugin URI:     xxx
 Description:    A plugin to run the subscription system for xxx
 Author:         xxx
-Author URI:     https://www.icebergwebdesign.com
+Author URI:     xxx
 License:        GPL2
 License URI:    https://www.gnu.org/licenses/gpl-2.0.html
 Version:        1.0
