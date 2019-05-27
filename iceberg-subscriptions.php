@@ -3,8 +3,8 @@
 Plugin Name:    Subscriptions
 Plugin URI:     xxx
 Description:    A plugin to run the subscription system for xxx
-Author:         xxx
-Author URI:     xxx
+Author:         Jennifer Brueske
+Author URI:     https://jenniferbrueske.com
 License:        GPL2
 License URI:    https://www.gnu.org/licenses/gpl-2.0.html
 Version:        1.0
@@ -48,106 +48,6 @@ function iceberg_register_cpts_subscription() {
 
 add_action( 'init', 'iceberg_register_cpts_subscription' );
 
-function sub_my_custom_status_creation(){
-        register_post_status( 'won', array(
-            'label'                     => _x( 'Won', 'post' ),
-            'label_count'               => _n_noop( 'Won <span class="count">(%s)</span>', 'Won <span class="count">(%s)</span>'),
-            'public'                    => false,
-            'protected'                 => true,
-            'exclude_from_search'       => false,
-            'show_in_admin_all_list'    => false,
-            'show_in_admin_status_list' => true
-        ));
-    }
-    add_action( 'init', 'sub_my_custom_status_creation' );
-
-    function sub_my_custom_status_add_in_quick_edit() {
-      $screen = get_current_screen();
-      if( $screen->post_type == 'subscription' ) {
-        echo "<script>
-        jQuery(document).ready( function() {
-            jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"won\">Won</option>' );      
-        }); 
-        </script>";}
-    }
-    add_action('admin_footer-edit.php','sub_my_custom_status_add_in_quick_edit');
-    function sub_my_custom_status_add_in_post_page() {
-      $screen = get_current_screen();
-      if( $screen->post_type == 'subscription' ) {
-        echo "<script>
-        jQuery(document).ready( function() {        
-            jQuery( 'select[name=\"post_status\"]' ).append( '<option value=\"won\">Won</option>' );
-        });
-        </script>";}
-    }
-    add_action('admin_footer-post.php', 'sub_my_custom_status_add_in_post_page');
-    add_action('admin_footer-post-new.php', 'sub_my_custom_status_add_in_post_page');
-
-function sub_my_custom_status_creation_lost(){
-        register_post_status( 'lost', array(
-            'label'                     => _x( 'Lost', 'post' ),
-            'label_count'               => _n_noop( 'Lost <span class="count">(%s)</span>', 'Lost <span class="count">(%s)</span>'),
-            'public'                    => false,
-            'exclude_from_search'       => false,
-            'show_in_admin_all_list'    => false,
-            'show_in_admin_status_list' => true
-        ));
-    }
-    add_action( 'init', 'sub_my_custom_status_creation_lost' );
-
-    function sub_my_custom_status_add_in_quick_edit_lost() {
-      $screen = get_current_screen();
-      if( $screen->post_type == 'subscription' ) {
-        echo "<script>
-        jQuery(document).ready( function() {
-            jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"lost\">Lost</option>' );      
-        }); 
-        </script>";}
-    }
-    add_action('admin_footer-edit.php','sub_my_custom_status_add_in_quick_edit_lost');
-    function sub_my_custom_status_add_in_post_page_lost() {
-      $screen = get_current_screen();
-      if( $screen->post_type == 'subscription' ) {
-        echo "<script>
-        jQuery(document).ready( function() {        
-            jQuery( 'select[name=\"post_status\"]' ).append( '<option value=\"lost\">Lost</option>' );
-        });
-        </script>";}
-    }
-    add_action('admin_footer-post.php', 'sub_my_custom_status_add_in_post_page_lost');
-    add_action('admin_footer-post-new.php', 'sub_my_custom_status_add_in_post_page_lost');
-
-// add_filter( 'gform_field_value', 'populate_fields_subscrip', 10, 3 );
-// function populate_fields_subscrip( $value, $field, $name ) {
-
-//     $subscrip_customer_information = get_field('subscrip_customer_information');
-//     $subscrip_semi_custom_development = get_field('subscrip_semi_custom_development');
-//     $subscrip_company_address = $subscrip_customer_information['company_address'];
-//     $subscrip_monthly_total = $subscrip_semi_custom_development['subscrip_semi_price'] + $subscrip_semi_custom_development['subscrip_semi_content_price'] + $subscrip_semi_custom_development['subscrip_social_brand_price'] + $subscrip_semi_custom_development['subscrip_social_media_price'];
-
-//     $values = array(
-//         'subscrip_company_name' => $subscrip_customer_information['company_name'],
-//         'subscrip_first_name' => $subscrip_customer_information['contact_first_name'],
-//         'subscrip_last_name' => $subscrip_customer_information['contact_last_name'],
-//         'subscrip_company_phone' => $subscrip_customer_information['company_phone'], 
-//         'subscrip_domain_ownership' => $subscrip_semi_custom_development['domain_name'],
-//         'subscrip_contact_email' => $subscrip_customer_information['contact_email'],
-//         'subscrip_street_address' => $subscrip_company_address['street_address'],
-//         'subscrip_address_line_2' => $subscrip_company_address['address_line_2'],
-//         'subscrip_city' => $subscrip_company_address['city'],
-//         'subscrip_state' => $subscrip_company_address['state'],
-//         'subscrip_zip' => $subscrip_company_address['zip'],
-//         'subscrip_country' => $subscrip_company_address['country'],
-//         'subscrip_start_date' => get_field('subscrip_start_date'),
-//         'subscrip_monthly' => $subscrip_monthly_total,
-//         'subscrip_down_payment_total' => get_field('subscrip_down_payment')
-
-
-//     );
-
-//     return isset( $values[ $name ] ) ? $values[ $name ] : $value;
-// }
-
 if( function_exists('acf_add_options_page') ) {
     
         acf_add_options_page(array(
@@ -182,7 +82,7 @@ function add_invoice_item( $customer, $feed, $entry, $form ) {
     // get the currency code for this entry.
     $currency = rgar( $entry, 'currency' );    
  
-    // get the amount from field and convert it to the smallest unit required by Stripe for the currency being used.
+    // get the amount from field 5 and convert it to the smallest unit required by Stripe for the currency being used.
     $amount = gf_stripe()->get_amount_export( rgar( $entry, '217.2' ), $currency ); // Update 5 to your field id
  
     $item = array(
@@ -218,5 +118,3 @@ function load_subscrip_template($template) {
 add_filter('single_template', 'load_subscrip_template');
 
 add_filter( 'gpro_disable_datepicker', '__return_true' );
-
-
