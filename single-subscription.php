@@ -2,7 +2,123 @@
 /**
  * The template for displaying all single posts and attachments
  */
+global $post;
+$author_id = $post->post_author;
+$author_email = get_the_author_meta( 'user_email' , $author_id );
+$author_name = get_the_author_meta( 'first_name' , $author_id );
+$author_phone = get_field( 'author_phone' , 'user_'. $author_id );
 
+?>
+<style>
+
+.iceberg-page-title-wrap {display: none;}
+
+
+</style>
+
+<?php
+
+if( $post->post_status == 'won' ) {
+    //fetch regular header
+    get_header();
+    ?>
+    
+        <div class="iceberg-content-area" style="padding: 0px;">
+            <div class="iwd-core-pbf-section" style="padding: 0px;">
+
+                <div class="iwd-core-pbf-section-container iwd-core-container clearfix" style="max-width: unset;">
+                    <div class="iwd-core-pbf-wrapper-container clearfix iwd-core-pbf-wrapper-full-no-space">
+                    <div class="iwd-core-pbf-column iwd-core-column-30 iwd-core-column-first">
+                        <div class="iwd-core-pbf-column-content-margin iwd-core-js  iwd-core-column-extend-left" data-sync-height="iceberg-size" >
+                            <div class="iwd-core-pbf-background-wrap">
+                                <?php
+                                $won_content = get_field('won_content', 'option');
+                                $image = $won_content['image'];
+                                ?>
+                                <div class="iwd-core-pbf-background iwd-core-parallax iwd-core-js" style="background-image: url('<?php echo $image['url']; ?>') ;background-size: cover ;background-position: center ;" data-parallax-speed="0">
+                                </div>
+                            </div>
+                            <div class="iwd-core-pbf-column-content clearfix iwd-core-js  iwd-core-sync-height-content">
+                            </div>
+                        </div>
+                    </div>                
+                     <div class="iwd-core-pbf-column iwd-core-column-30">
+                        <div class="iwd-core-pbf-column-content-margin iwd-core-js " style="padding: 240px 30px 240px 60px;" data-sync-height="iceberg-size" data-sync-height-center="">
+                            <div class="iwd-core-sync-height-pre-spaces" style="padding-top: 10px;"></div>
+                            <div class="iwd-core-pbf-column-content clearfix iwd-core-js  iwd-core-sync-height-content">
+                                <div class="iwd-core-pbf-element">
+                                    <div class="iwd-core-text-box-item iwd-core-item-pdlr iwd-core-item-pdb iwd-core-left-align" style="padding-bottom: 0px ;">
+                                        <div class="iwd-core-text-box-item-content" style="text-transform: none ; text-align: center;">
+                                            <?php echo $won_content['content']; ?>
+                                            <p>Your sales contact is <strong><?php echo $author_name; ?></strong> 
+                                            <?php if( !empty($author_phone) ) { ?> 
+                                                at <a href="tel:<?php echo $author_phone; ?>"><?php echo $author_phone; ?></a> 
+                                                or by email <?php } ?>
+                                                at <a href="mailto:<?php echo $author_email; ?>"><?php echo $author_email; ?></a>.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>                                            
+                    </div>          
+                </div>
+            </div>
+        </div>
+    
+<?php
+}elseif( $post->post_status == 'lost' ){
+    //fetch regular header
+    get_header();
+    ?>
+    
+        <div class="iceberg-content-area" style="padding: 0px;">
+            <div class="iwd-core-pbf-section" style="padding: 0px;">
+
+                <div class="iwd-core-pbf-section-container iwd-core-container clearfix" style="max-width: unset;">
+                    <div class="iwd-core-pbf-wrapper-container clearfix iwd-core-pbf-wrapper-full-no-space">
+                    <div class="iwd-core-pbf-column iwd-core-column-30 iwd-core-column-first">
+                        <div class="iwd-core-pbf-column-content-margin iwd-core-js  iwd-core-column-extend-left" data-sync-height="iceberg-size" >
+                            <div class="iwd-core-pbf-background-wrap">
+                                <?php
+                                $lost_content = get_field('lost_content', 'option');
+                                $image = $lost_content['image'];
+                                ?>
+                                <div class="iwd-core-pbf-background iwd-core-parallax iwd-core-js" style="background-image: url('<?php echo $image['url']; ?>') ;background-size: cover ;background-position: center ;" data-parallax-speed="0">
+                                </div>
+                            </div>
+                            <div class="iwd-core-pbf-column-content clearfix iwd-core-js  iwd-core-sync-height-content">
+                            </div>
+                        </div>
+                    </div>                
+                     <div class="iwd-core-pbf-column iwd-core-column-30">
+                        <div class="iwd-core-pbf-column-content-margin iwd-core-js " style="padding: 240px 30px 240px 60px;" data-sync-height="iceberg-size" data-sync-height-center="">
+                            <div class="iwd-core-sync-height-pre-spaces" style="padding-top: 10px;"></div>
+                            <div class="iwd-core-pbf-column-content clearfix iwd-core-js  iwd-core-sync-height-content">
+                                <div class="iwd-core-pbf-element">
+                                    <div class="iwd-core-text-box-item iwd-core-item-pdlr iwd-core-item-pdb iwd-core-left-align" style="padding-bottom: 0px ;">
+                                        <div class="iwd-core-text-box-item-content" style="text-transform: none ; text-align: center;">
+                                            <?php echo $lost_content['content']; ?>
+                                            <p>Your sales contact is <strong><?php echo $author_name; ?></strong> 
+                                            <?php if( !empty($author_phone) ) { ?> 
+                                                at <a href="tel:<?php echo $author_phone; ?>"><?php echo $author_phone; ?></a> 
+                                                or by email <?php } ?>
+                                                at <a href="mailto:<?php echo $author_email; ?>"><?php echo $author_email; ?></a>.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                            
+                </div>          
+            </div>
+        </div>
+    </div>
+    
+<?php
+}else{
 
 if ( $overridden_template = locate_template( 'header-subscription.php' ) ) {
     /*
@@ -75,6 +191,7 @@ if ( $overridden_template = locate_template( 'header-subscription.php' ) ) {
 		// change order vars and calculations
 
 			setlocale(LC_MONETARY, 'en_US.utf8');
+            $post_ID = get_the_ID();
 			$subscrip_customer_information = get_field('subscrip_customer_information');
     		$subscrip_semi_custom_development = get_field('subscrip_semi_custom_development');
             $sales_email = get_the_author_meta( 'user_email');
@@ -303,7 +420,7 @@ if ( $overridden_template = locate_template( 'header-subscription.php' ) ) {
         </div>
 
                             <div class="proposal-order-form" id="order">
-                                <a href="/orderform-monthly/?subscrip_company_name=<?php echo urlencode($subscrip_customer_information['company_name']); ?>&subscrip_first_name=<?php echo urlencode($subscrip_customer_information['contact_first_name']); ?>&subscrip_last_name=<?php echo urlencode($subscrip_customer_information['contact_last_name']); ?>&subscrip_company_phone=<?php echo $subscrip_customer_information['company_phone']; ?>&subscrip_domain_ownership=<?php echo $subscrip_semi_custom_development['domain_name']; ?>&subscrip_contact_email=<?php echo $subscrip_customer_information['contact_email']; ?>&subscrip_street_address=<?php echo urlencode($subscrip_company_address['street_address']); ?>&subscrip_address_line_2=<?php echo urlencode($subscrip_company_address['address_line_2']); ?>&subscrip_city=<?php echo urlencode($subscrip_company_address['city']); ?>&subscrip_state=<?php echo urlencode($subscrip_company_address['state']); ?>&subscrip_zip=<?php echo urlencode($subscrip_company_address['zip']); ?>&subscrip_country=<?php echo urlencode($subscrip_company_address['country']); ?>&subscrip_start_date=<?php echo Date('m-d-Y', $unix_timestamp); ?>&unix_timestamp=<?php echo $unix_timestamp; ?>&subscrip_monthly=<?php echo $subscrip_monthly_total; ?>&subscrip_down_payment_total=<?php echo get_field('subscrip_down_payment'); ?>&sales_email=<?php echo $sales_email; ?>&subscrip_link=<?php the_permalink(); ?>" target="_blank">Start Your Project</a>
+                                <a href="/orderform-monthly/?subscrip_company_name=<?php echo urlencode($subscrip_customer_information['company_name']); ?>&subscrip_first_name=<?php echo urlencode($subscrip_customer_information['contact_first_name']); ?>&subscrip_last_name=<?php echo urlencode($subscrip_customer_information['contact_last_name']); ?>&subscrip_company_phone=<?php echo $subscrip_customer_information['company_phone']; ?>&subscrip_domain_ownership=<?php echo $subscrip_semi_custom_development['domain_name']; ?>&subscrip_contact_email=<?php echo $subscrip_customer_information['contact_email']; ?>&subscrip_street_address=<?php echo urlencode($subscrip_company_address['street_address']); ?>&subscrip_address_line_2=<?php echo urlencode($subscrip_company_address['address_line_2']); ?>&subscrip_city=<?php echo urlencode($subscrip_company_address['city']); ?>&subscrip_state=<?php echo urlencode($subscrip_company_address['state']); ?>&subscrip_zip=<?php echo urlencode($subscrip_company_address['zip']); ?>&subscrip_country=<?php echo urlencode($subscrip_company_address['country']); ?>&subscrip_start_date=<?php echo Date('m-d-Y', $unix_timestamp); ?>&proposal_id=<?php echo $post_ID; ?>&unix_timestamp=<?php echo $unix_timestamp; ?>&subscrip_monthly=<?php echo $subscrip_monthly_total; ?>&subscrip_down_payment_total=<?php echo get_field('subscrip_down_payment'); ?>&sales_email=<?php echo $sales_email; ?>&subscrip_link=<?php the_permalink(); ?>" target="_blank">Start Your Project</a>
                             </div>
         <div style="padding-top: 10px; float: right;"><?php echo do_shortcode('[print-me title="Print Proposal" printstyle="false" do_not_print=".proposal-order-form, .printomatictext"]'); ?></div>
 
@@ -380,7 +497,7 @@ if ( $overridden_template = locate_template( 'header-subscription.php' ) ) {
                                 </div>
                             </div>
                             <div id="ice_form">
-                                <a href="/orderform-monthly/?subscrip_company_name=<?php echo urlencode($subscrip_customer_information['company_name']); ?>&subscrip_first_name=<?php echo urlencode($subscrip_customer_information['contact_first_name']); ?>&subscrip_last_name=<?php echo urlencode($subscrip_customer_information['contact_last_name']); ?>&subscrip_company_phone=<?php echo $subscrip_customer_information['company_phone']; ?>&subscrip_domain_ownership=<?php echo $subscrip_semi_custom_development['domain_name']; ?>&subscrip_contact_email=<?php echo $subscrip_customer_information['contact_email']; ?>&subscrip_street_address=<?php echo urlencode($subscrip_company_address['street_address']); ?>&subscrip_address_line_2=<?php echo urlencode($subscrip_company_address['address_line_2']); ?>&subscrip_city=<?php echo urlencode($subscrip_company_address['city']); ?>&subscrip_state=<?php echo urlencode($subscrip_company_address['state']); ?>&subscrip_zip=<?php echo urlencode($subscrip_company_address['zip']); ?>&subscrip_country=<?php echo urlencode($subscrip_company_address['country']); ?>&subscrip_start_date=<?php echo Date('m-d-Y', $unix_timestamp); ?>&unix_timestamp=<?php echo $unix_timestamp; ?>&subscrip_monthly=<?php echo $subscrip_monthly_total; ?>&subscrip_down_payment_total=<?php echo get_field('subscrip_down_payment'); ?>&sales_email=<?php echo $sales_email; ?>&subscrip_link=<?php the_permalink(); ?>" target="_blank">Start Your Project</a>
+                                <a href="/orderform-monthly/?subscrip_company_name=<?php echo urlencode($subscrip_customer_information['company_name']); ?>&subscrip_first_name=<?php echo urlencode($subscrip_customer_information['contact_first_name']); ?>&subscrip_last_name=<?php echo urlencode($subscrip_customer_information['contact_last_name']); ?>&subscrip_company_phone=<?php echo $subscrip_customer_information['company_phone']; ?>&subscrip_domain_ownership=<?php echo $subscrip_semi_custom_development['domain_name']; ?>&subscrip_contact_email=<?php echo $subscrip_customer_information['contact_email']; ?>&subscrip_street_address=<?php echo urlencode($subscrip_company_address['street_address']); ?>&subscrip_address_line_2=<?php echo urlencode($subscrip_company_address['address_line_2']); ?>&subscrip_city=<?php echo urlencode($subscrip_company_address['city']); ?>&subscrip_state=<?php echo urlencode($subscrip_company_address['state']); ?>&subscrip_zip=<?php echo urlencode($subscrip_company_address['zip']); ?>&subscrip_country=<?php echo urlencode($subscrip_company_address['country']); ?>&subscrip_start_date=<?php echo Date('m-d-Y', $unix_timestamp); ?>&proposal_id=<?php echo $post_ID; ?>&unix_timestamp=<?php echo $unix_timestamp; ?>&subscrip_monthly=<?php echo $subscrip_monthly_total; ?>&subscrip_down_payment_total=<?php echo get_field('subscrip_down_payment'); ?>&sales_email=<?php echo $sales_email; ?>&subscrip_link=<?php the_permalink(); ?>" target="_blank">Start Your Project</a>
                             </div>
                         </div>
 
@@ -390,6 +507,8 @@ if ( $overridden_template = locate_template( 'header-subscription.php' ) ) {
 <?php endif;
 
 	} }// while
+
+}
 
 	get_footer(); ?>
 
